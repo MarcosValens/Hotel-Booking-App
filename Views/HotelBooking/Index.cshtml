@@ -1,0 +1,37 @@
+﻿@model IEnumerable<HotelApp.Models.HotelBookingModel>
+
+@{
+    ViewData["Title"] = "Hotel Bookings";
+}
+
+<h1>Bookings</h1>
+
+<a asp-action="Create" class="btn btn-primary">New Booking</a>
+
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Hotel Id</th>
+            <th>Client Id</th>
+            <th>Check-In</th>
+            <th>Check-Out</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var booking in Model)
+        {
+            <tr>
+                <td>@booking.Id</td>
+                <td>@booking.HotelId</td>
+                <td>@booking.ClientId</td>
+                <td>@booking.CheckInDate.ToShortDateString()</td>
+                <td>@booking.CheckOutDate.ToShortDateString()</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@booking.Id" class="btn btn-sm btn-secondary">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

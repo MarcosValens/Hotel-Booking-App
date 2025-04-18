@@ -1,0 +1,30 @@
+﻿@model HotelApp.Models.HotelBookingFormViewModel
+
+<h1>Edit Booking</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Booking.Id" />
+
+    <div class="form-group">
+        <label asp-for="Booking.HotelId"></label>
+        <select asp-for="Booking.HotelId" asp-items="Model.Hotels" class="form-control"></select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Booking.ClientId"></label>
+        <select asp-for="Booking.ClientId" asp-items="Model.Clients" class="form-control"></select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Booking.CheckInDate"></label>
+        <input asp-for="Booking.CheckInDate" type="date" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Booking.CheckOutDate"></label>
+        <input asp-for="Booking.CheckOutDate" type="date" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-2">Save</button>
+    <a asp-action="Index" class="btn btn-secondary mt-2">Cancel</a>
+</form>

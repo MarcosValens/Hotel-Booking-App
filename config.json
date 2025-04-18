@@ -1,0 +1,5 @@
+{
+  "FS_FOLDER": "Data",
+  "DATA_TYPE": "DB",
+  "DB_CONNECTION": "Data Source=hotelapp.db"
+}

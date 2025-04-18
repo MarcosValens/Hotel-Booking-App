@@ -1,0 +1,33 @@
+﻿@model IEnumerable<HotelApp.Models.ClientModel>
+
+@{
+    ViewData["Title"] = "Clients";
+}
+
+<h1>Clients</h1>
+
+<a asp-action="Create" class="btn btn-primary">New Client</a>
+
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var client in Model)
+        {
+            <tr>
+                <td>@client.Id</td>
+                <td>@client.FullName</td>
+                <td>@client.Email</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@client.Id" class="btn btn-sm btn-secondary">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
