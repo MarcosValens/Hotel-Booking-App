@@ -19,6 +19,7 @@ else if (config.DATA_TYPE == "DB")
 {
     builder.Services.AddDbContext<AppDbContext>(options =>
         options.UseSqlite(config.DB_CONNECTION ?? "Data Source=hotelapp.db"));
+
     builder.Services.AddScoped(typeof(IRepositoryService<>), typeof(DbRepositoryService<>));
 }
 
@@ -26,23 +27,13 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
+if (config.DATA_TYPE == "DB")
 {
+    using var scope = app.Services.CreateScope();
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.EnsureCreated();
+    DbSeeder.Seed(db);
 }
-
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.EnsureCreated();
-
-    if (config.DATA_TYPE == "DB")
-    {
-        DbSeeder.Seed(db);
-    }
-}
-
 
 app.UseStaticFiles();
 app.UseRouting();
